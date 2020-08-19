@@ -23,7 +23,7 @@
 
 - master로 되어있지 않아도 상관없다. (git으로 관리를 하지 않는다는 뜻.)
 
-- 프로젝트 이름과 같은 폴더와 manage.py 파일이 만들어진다.
+- 프로젝트 이름과 같은 폴더와 manage.py 파일이 만들어진다. (cd 프로젝트 이름)
 
 - **manage 파일과 폴더가 있는 곳에서 vs 코드로 열기를 한다.**
 
@@ -34,12 +34,12 @@
 2. 어플리케이션 생성
 
 - ```bash
-  $ python manage.py startapp articles
+  $ python manage.py startapp articles #어플 이름
   ```
 
 - 프로젝트 폴더의 **settings.py**로 들어간다.
 
-- 33번째 줄 INSTALLED_APPS의 맨 위에 `'articles'` 를 입력한다.
+- **33번째 줄 INSTALLED_APPS의 맨 위에 `'articles'`(어플 이름) 를 입력한다.**
 
 - 최하단에 
   - LANGUAGE_CODE를       'ko-kr'
@@ -300,7 +300,7 @@ path('dtl/', views.dtl),
 def dtl(request):
     hws = ['homework', 'workshop', 'practice']
     context = {
-        'hws' = hws
+        'hws': hws
     }
     return render(request, 'dtl.html', context)
 ```
