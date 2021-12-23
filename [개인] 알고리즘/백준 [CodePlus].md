@@ -297,3 +297,289 @@ for i, s in enumerate(nines):
 print(result)
 ```
 
+
+
+## 9095. 1, 2, 3 더하기
+
+```python
+# 9095. 1, 2, 3 더하기
+T = int(input())
+
+dp = [0, 1, 2, 4] + [0] * 7
+
+for i in range(4, 11):
+    dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3]
+
+for tc in range(1, T + 1):
+    n = int(input())
+
+    print(dp[n])
+```
+
+
+
+## 15650. N과 M (2)
+
+```python
+# 15650. N과 M (2)
+N, M = map(int, input().split())
+
+# 1부터 N까지 자연수 중에서 중복 없이 2개를 고른 수열
+
+from itertools import permutations
+
+nums = [i for i in range(1, N + 1)]
+
+if M == 1:
+    for n in nums:
+        print(n)
+
+else:
+    result = []
+    per = permutations(nums, M)
+
+    for row in per:
+        row = list(row)
+        row.sort()
+
+        if row not in result:
+            result.append(row)
+
+    for res in result:
+        print(*res)
+
+```
+
+```python
+# 15650. N과 M (2)
+N, M = map(int, input().split())
+
+
+def dfs(start, N, M, result):
+    if len(result) == M:
+        print(*result)
+        return
+
+    for i in range(start, N + 1):
+        if i not in result:
+            result.append(i)
+            dfs(i, N, M, result)
+            result.pop()
+
+
+dfs(1, N, M, [])
+```
+
+
+
+## 15651. N과 M (3)
+
+```python
+# 15651. N과 M (3)
+N, M = map(int, input().split())
+
+
+def dfs(start, N, M, result):
+    if len(result) == M:
+        print(*result)
+        return
+
+    for i in range(1, N + 1):
+        result.append(i)
+        dfs(1, N, M, result)
+        result.pop()
+
+
+dfs(1, N, M, [])
+```
+
+
+
+## 15652. N과 M (4)
+
+```python
+# 15652. N과 M (4)
+N, M = map(int, input().split())
+
+
+def dfs(start, N, M, result):
+    if len(result) == M:
+        print(*result)
+        return
+
+    for i in range(start, N + 1):
+        result.append(i)
+        dfs(i, N, M, result)
+        result.pop()
+
+
+dfs(1, N, M, [])
+```
+
+
+
+## 15654. N과 M (5)
+
+```python
+# 15654. N과 M (5)
+def dfs(start, N, M, result):
+    if len(result) == M:
+        print(*result)
+        return
+
+    for i in range(start, len(nums)):
+        if nums[i] not in result:
+            result.append(nums[i])
+
+            dfs(0, N, M, result)
+
+            result.pop()
+
+
+N, M = map(int, input().split())
+
+nums = list(map(int, input().split()))
+
+nums.sort()
+
+dfs(0, N, M, [])
+
+```
+
+
+
+## 15655. N과 M (6)
+
+```python
+# 15655. N과 M (6)
+def dfs(start, N, M, result):
+    if len(result) == M:
+        print(*result)
+        return
+
+    for i in range(start, len(nums)):
+        if nums[i] not in result:
+            result.append(nums[i])
+
+            dfs(i, N, M, result)
+
+            result.pop()
+
+
+N, M = map(int, input().split())
+
+nums = list(map(int, input().split()))
+
+nums.sort()
+
+dfs(0, N, M, [])
+
+```
+
+
+
+## 15656. N과 M (7)
+
+```python
+# 15656. N과 M (7)
+def dfs(start, N, M, result):
+    if len(result) == M:
+        print(*result)
+        return
+
+    for i in range(start, len(nums)):
+
+        result.append(nums[i])
+
+        dfs(0, N, M, result)
+
+        result.pop()
+
+
+N, M = map(int, input().split())
+
+nums = list(map(int, input().split()))
+
+nums.sort()
+
+dfs(0, N, M, [])
+
+```
+
+
+
+## 15657. N과 M (8)
+
+```python
+# 15657. N과 M (8)
+def dfs(start, N, M, result):
+    if len(result) == M:
+        print(*result)
+        return
+
+    for i in range(start, len(nums)):
+
+        result.append(nums[i])
+
+        dfs(i, N, M, result)
+
+        result.pop()
+
+
+N, M = map(int, input().split())
+
+nums = list(map(int, input().split()))
+
+nums.sort()
+
+dfs(0, N, M, [])
+
+```
+
+
+
+## 1759. 암호 만들기
+
+```python
+# 1759. 암호 만들기
+def dfs(start, L, C, result):
+    global c_count, v_count
+
+    if len(result) == L:
+        c_count, v_count = 0, 0
+
+        for i in range(L):
+            if result[i] in vowel:
+                v_count += 1
+            else:
+                c_count += 1
+
+        if c_count >= 2 and v_count >= 1:
+            for res in result:
+                print(res, end='')
+            print()
+        return
+
+    for i in range(start, C):
+        if alpha[i] not in result:
+            result.append(alpha[i])
+
+            dfs(i, L, C, result)
+
+            result.pop()
+
+
+L, C = map(int, input().split())    # L자리의 패스워드 / C개의 알파벳
+
+alpha = list(input().split())
+
+alpha.sort()
+
+vowel = ['a', 'i', 'e', 'o', 'u']
+
+c_count, v_count = 0, 0
+
+dfs(0, L, C, [])
+
+```
+
