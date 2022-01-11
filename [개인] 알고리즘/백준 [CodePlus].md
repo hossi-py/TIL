@@ -583,3 +583,51 @@ dfs(0, L, C, [])
 
 ```
 
+
+
+## 14889. 스타트와 링크
+
+```python
+import sys
+from itertools import combinations
+
+# 14889. 스타트와 링크
+N = int(input())
+board = [list(map(int, input().split())) for _ in range(N)]
+
+players = [x for x in range(N)]
+teams = []
+
+for team in list(combinations(players, N // 2)):
+    teams.append(team)
+
+_min = float("inf")
+
+for i in range(len(teams) // 2):
+    start = teams[i]
+    start_stat = 0  # start 팀 능력치
+
+    for j in range(len(start)):
+        player = start[j]
+
+        for k in start:
+            start_stat += board[player][k]
+
+    link = teams[-i - 1]
+    link_stat = 0   # link 팀 능력치
+
+    for j in range(len(link)):
+        player = link[j]
+
+        for k in link:
+            link_stat += board[player][k]
+
+    temp = abs(start_stat - link_stat)
+
+    if temp < _min:
+        _min = temp
+
+print(_min)
+
+```
+
